@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ppetchda <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                               +#+#+#+#+#+     +#+            #
-#    Created: 2022/02/07 13:18:59 by porrapat          #+#    #+#              #
-#    Updated: 2022/02/15 11:13:35 by ppetchda         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 SRCS = ft_memset.c		\
 	   ft_bzero.c		\
 	   ft_memcpy.c		\
@@ -84,3 +72,4 @@ bonus: $(OBJSB)
 	$(CC) $(SRCS) $(SRCSB) $(CC_FLAGS)
 	ar rcs $(NAME) $(OBJSB)
 
+.PHONY: all clean fclean re bonus
