@@ -19,7 +19,7 @@ clean:
 	-rm --force *.gch 
 
 fclean: clean
-	rm -f $(NAME)
+	rm --force $(NAME)
 
 re: fclean all
 
