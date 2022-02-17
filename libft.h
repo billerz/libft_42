@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-// Part One Function
+// Part 1 Function
 void				ft_bzero(void *s, size_t n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);

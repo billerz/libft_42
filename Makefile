@@ -1,4 +1,4 @@
-SRCS = ft_*.c		
+SRCS = *.c		
 
 NAME = libft.a
 
