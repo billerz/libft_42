@@ -9,17 +9,16 @@ CC = gcc
 CC_FLAGS = -c -Wall -Wextra -Werror
 
 $(NAME): $(OBJS)
-	$(CC) $(SRCS) libft.h $(CC_FLAGS)
+	$(CC) $(SRCS) $(CC_FLAGS)
 	ar rcs $(NAME) $(OBJS)
 
 all: $(NAME)
 
 clean:
-	-rm --force $(OBJS)
-	-rm --force *.gch 
+	-rm -f $(OBJS)
 
 fclean: clean
-	rm --force $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 

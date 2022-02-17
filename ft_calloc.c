@@ -14,11 +14,11 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*rtn;
+	void	*arr;
 
-	rtn = malloc(size * count);
-	if (!rtn)
+	arr = malloc(count * size);
+	if (arr == NULL)
 		return (NULL);
-	ft_bzero(rtn, size * count);
-	return (rtn);
+	ft_bzero(arr, count * size);
+	return (arr);
 }

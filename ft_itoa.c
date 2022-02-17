@@ -12,67 +12,47 @@
 
 #include "libft.h"
 
-static int	ft_estim(long n)
+static size_t	find_size(int n)
 {
-	size_t	estim;
-	int		isneg;
+	size_t	size;
 
-	estim = 0;
-	isneg = 0;
+	size = 0;
+	if (n == 0)
+		return (1);
 	if (n < 0)
+		size++;
+	while (n)
 	{
-		estim++;
-		isneg++;
-		n = -n;
-	}
-	while (n >= 1)
-	{
-		estim++;
 		n /= 10;
+		size++;
 	}
-	return (estim);
-}
-
-static char	*ft_gen(char *rtn, long nbr, int len, int isneg)
-{
-	if (nbr != 0)
-		rtn = malloc(sizeof(char) * (len + 1));
-	else
-		return (rtn = ft_strdup("0"));
-	if (!rtn)
-		return (0);
-	isneg = 0;
-	if (nbr < 0)
-	{
-		isneg++;
-		nbr = -nbr;
-	}
-	rtn[len] = '\0';
-	while (--len)
-	{
-		rtn[len] = (nbr % 10) + '0';
-		nbr /= 10;
-	}
-	if (isneg == 1)
-		rtn[0] = '-';
-	else
-		rtn[0] = (nbr % 10) + '0';
-	return (rtn);
+	return (size);
 }
 
 char	*ft_itoa(int n)
 {
-	int		len;
-	char	*rtn;
-	long	nbr;
-	int		isneg;
+	size_t		size;
+	char		*str;
+	long long	num;
 
-	nbr = n;
-	len = ft_estim(nbr);
-	rtn = 0;
-	isneg = 0;
-	rtn = ft_gen(rtn, nbr, len, isneg);
-	if (!rtn)
-		return (0);
-	return (rtn);
+	num = (long long) n;
+	size = find_size(num);
+	str = (char *) malloc(sizeof(char) * (size + 1));
+	if (str == NULL)
+		return (NULL);
+	str[size] = '\0';
+	if (num == 0)
+		str[0] = '0';
+	if (num < 0)
+	{
+		str[0] = '-';
+		num = -num;
+	}
+	while (num)
+	{
+		str[size - 1] = (num % 10) + '0';
+		num /= 10;
+		size--;
+	}
+	return (str);
 }

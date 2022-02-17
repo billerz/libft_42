@@ -12,38 +12,56 @@
 
 #include "libft.h"
 
-static int	is_in_set(char c, const char *set)
+static int	char_in_str(char c, char const *str)
 {
-	while (*set)
-		if (c == *set++)
-			return (0);
-	return (1);
+	while (*str)
+	{
+		if (*str == c)
+			return (1);
+		str++;
+	}
+	return (0);
+}
+
+static size_t	get_first_pos(char const *s1, char const *set)
+{
+	size_t	i;
+
+	i = 0;
+	while (char_in_str(s1[i], set) && s1[i] != '\0')
+		i++;
+	return (i);
+}
+
+static size_t	get_last_pos(char const *s1, char const *set)
+{
+	size_t	i;
+
+	i = ft_strlen(s1) - 1;
+	while (char_in_str(s1[i], set) && i + 1 > 0)
+		i--;
+	return (i + 1);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	start;
-	size_t	end;
-	char	*rtn;
+	char	*str;
+	size_t	first;
+	size_t	last;
 
-	if (!s1)
-		return (NULL);
-	if (!set)
-		return (ft_strdup(s1));
-	start = 0;
-	end = ft_strlen(s1);
-	while (is_in_set(s1[start], set) == 0)
-		start++;
-	if (start == ft_strlen(s1))
+	first = get_first_pos(s1, set);
+	last = get_last_pos(s1, set);
+	if (last >= first)
+		str = (char *) malloc(sizeof(char) * (last - first + 1));
+	else
 	{
-		rtn = ft_strdup("");
-		if (!rtn)
-			return (NULL);
-		else
-			return (rtn);
+		str = (char *) malloc(sizeof(char));
+		str[0] = '\0';
+		return (str);
 	}
-	while (is_in_set(s1[end - 1], set) == 0)
-		end--;
-	rtn = ft_substr(s1, start, end - start);
-	return (rtn);
+	if (str == NULL)
+		return (NULL);
+	ft_memcpy(str, s1 + first, last - first);
+	str[last - first] = '\0';
+	return (str);
 }
