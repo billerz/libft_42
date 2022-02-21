@@ -1,8 +1,9 @@
-GREEN = \033[38;5;2m
+YELLOW = \033[38;5;222m
 NORMAL = \033[38;5;255m
 RED = \033[38;5;1m
 BLUE = \033[38;5;4m
-BRIGHTGREEN = \033[38;5;118m
+BRIGHTGREEN = \033[38;5;46m
+ORANGE = \033[38;5;166m
 
 SRCS = 		ft_atoi.c \
 			ft_bzero.c \
@@ -37,36 +38,52 @@ SRCS = 		ft_atoi.c \
 			ft_strtrim.c \
 			ft_substr.c \
 			ft_tolower.c \
-			ft_toupper.c 		
+			ft_toupper.c
+
+SRCSB = ft_lstadd_back.c \
+			ft_lstadd_front.c \
+			ft_lstclear.c \
+			ft_lstdelone.c \
+			ft_lstiter.c \
+			ft_lstlast.c \
+			ft_lstmap.c \
+			ft_lstnew.c \
+			ft_lstsize.c
 
 NAME = libft.a
 
 OBJS = $(SRCS:.c=.o)
+OBJSB = $(SRCSB:.c=.o)
 
 CC = gcc
 
 CC_FLAGS = -Wall -Wextra -Werror
 
 %.o: %.c
-	@echo "$(GREEN)Compiling: $(BRIGHTGREEN)$<$(NORMAL)"
+	@echo "$(ORANGE)Compiling: $(YELLOW)$<$(NORMAL)"
 	@${CC} ${CC_FLAGS} -c $< -o $@ 
 
 $(NAME): $(OBJS)
-	@echo "$(BLUE)Adding to library...$(NORMAL)"
+	@echo "$(BLUE)Adding function to library...$(NORMAL)"
 	@ar rcs $(NAME) $(OBJS)
-	@echo "$(GREEN)Successfully added to library!"
+	@echo "$(BRIGHTGREEN)Successfully added to library!"
+
+bonus : $(NAME) $(OBJSB)
+	@echo "$(BLUE)Adding bonus function to library...$(NORMAL)"
+	@ar -rcs $(NAME) $(OBJSB)
+	@echo "$(BRIGHTGREEN)Successfully added to library!"
 
 all: $(NAME)
 
 clean:
 	@echo "$(RED)Removing all object files...$(NORMAL)"
-	@rm -f $(OBJS)
-	@echo "$(GREEN)Succesfully removed all object files!"
+	@rm -f $(OBJS) $(OBJSB)
+	@echo "$(BRIGHTGREEN)Succesfully removed all object files!"
 
 fclean: clean
 	@echo "$(RED)Removing libft.a...$(NORMAL)"
 	@rm -f $(NAME)
-	@echo "$(GREEN)Successfully removed libft.a!"
+	@echo "$(BRIGHTGREEN)Successfully removed libft.a!"
 
 re: fclean all
 
